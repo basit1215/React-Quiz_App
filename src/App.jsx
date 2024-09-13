@@ -58,14 +58,14 @@ function App() {
 
   if (!quizStarted) {
     return (
-      <div className="min-h-screen  px-[350px] pt-[200px]   items-center justify-center bg-gradient-to-r from-orange-400 to-yellow-600">
-        <div className="bg-white opacity-65 p-12    rounded-xl shadow-xl text-center max-w-2xl w-full">
-          <h1 className="text-5xl font-extrabold mb-8 text-brown-800">
+      <div className="min-h-screen flex px-4 md:px-[100px] lg:px-[200px] xl:px-[350px] pt-[100px] lg:pt-[200px] items-center justify-center bg-gradient-to-r from-orange-400 to-yellow-600">
+        <div className="bg-white opacity-90 p-6 sm:p-8 md:p-12 rounded-xl shadow-xl text-center max-w-xl md:max-w-2xl w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 text-brown-800">
              Quiz App
           </h1> 
           <button
             onClick={startQuiz}
-            className="bg-orange-700 text-white p-4 rounded-lg text-2xl font-semibold shadow-md hover:bg-orange-800 transition duration-300"  >
+            className="bg-orange-700 text-white p-3 sm:p-4 rounded-lg text-lg sm:text-2xl font-semibold shadow-md hover:bg-orange-800 transition duration-300"  >
             Get Started
           </button>
         </div>
@@ -77,20 +77,20 @@ function App() {
     const passedMessage = score > questions.length / 2 ? "You Passed!" : "Try Again!";
 
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r  from-orange-400 to-yellow-600">
-        <div className="bg-white p-12 rounded-xl shadow-xl  text-center max-w-xl w-full opacity-65">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">
+      <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-r from-orange-400 to-yellow-600">
+        <div className="bg-white p-6 sm:p-8 md:p-12 rounded-xl shadow-xl text-center max-w-lg md:max-w-xl w-full opacity-90">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-800">
             Quiz Finished!
           </h2>
-          <p className="text-2xl mb-4 text-gray-700">
+          <p className="text-xl sm:text-2xl mb-2 sm:mb-4 text-gray-700">
             Your score: {score} / {questions.length}
           </p>
-          <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">
             {passedMessage}
           </h3>
           <button
             onClick={resetQuiz}
-            className="bg-orange-700 text-white p-4 rounded-lg text-lg font-semibold shadow-md hover:bg-orange-800 transition duration-300"
+            className="bg-orange-700 text-white p-3 sm:p-4 rounded-lg text-lg font-semibold shadow-md hover:bg-orange-800 transition duration-300"
           >
             Restart Quiz
           </button>
@@ -106,18 +106,18 @@ function App() {
   }));
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r  from-orange-400 to-yellow-600">
-      <div className="bg-white opacity-65 p-12 rounded-xl shadow-xl max-w-3xl w-full">
-        <h2 className="text-2xl font-bold mb-6 text-brown-800">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-r from-orange-400 to-yellow-600">
+      <div className="bg-white opacity-90 p-6 sm:p-8 md:p-12 rounded-xl shadow-xl max-w-lg md:max-w-3xl w-full">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-6 text-brown-800">
           Question {currentQuestionIndex + 1} / {questions.length}
         </h2>
-        <h3 className="text-xl mb-6 text-black">
+        <h3 className="text-md sm:text-lg md:text-xl mb-4 sm:mb-6 text-black">
           {question?.text}
         </h3>
 
         <div>
           {answers.map((answer, index) => (
-            <label key={index} className="block text-black mb-4">
+            <label key={index} className="block text-black mb-2 sm:mb-4">
               <input
                 type="radio"
                 name="answer"
@@ -133,7 +133,7 @@ function App() {
 
         <button
           onClick={nextQuestion}
-          className="mt-6 bg-orange-700 text-white p-4 rounded-lg w-full text-lg font-semibold shadow-md hover:bg-orange-800 transition duration-300"
+          className="mt-4 sm:mt-6 bg-orange-700 text-white p-3 sm:p-4 rounded-lg w-full text-lg font-semibold shadow-md hover:bg-orange-800 transition duration-300"
         >
           Next
         </button>
