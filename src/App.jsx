@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function App() {
+
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -16,7 +18,7 @@ function App() {
         setQuestions(response.data);
       } catch (error) {
         console.error("Error fetching questions:", error);
-        alert("Failed to fetch questions. Please check your internet connection or try again later.");
+        Swal.fire("Error", "Failed to fetch Questions. Please check your Internet connection or Try again later.", "error");
       }
     };
 
@@ -29,14 +31,14 @@ function App() {
 
   const nextQuestion = () => {
     if (!selectedAnswer) {
-      alert("Please select an option");
+      Swal.fire("Alert", "Please select an option", "warning");
       return;
     }
 
     if (selectedAnswer === questions[currentQuestionIndex]?.correctAnswer) {
       setScore(score + 1);
     }
-    
+
     setSelectedAnswer("");
 
     if (currentQuestionIndex < questions.length - 1) {
@@ -49,11 +51,23 @@ function App() {
   const startQuiz = () => setQuizStarted(true);
 
   const resetQuiz = () => {
-    setQuizStarted(false);
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setSelectedAnswer("");
-    setQuizEnded(false);
+    Swal.fire({
+      title: "Reset Quiz",
+      text: "Are you sure you want to Reset the Quiz?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Reset it!",
+      cancelButtonText: "No, keep it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setQuizStarted(false);
+        setCurrentQuestionIndex(0);
+        setScore(0);
+        setSelectedAnswer("");
+        setQuizEnded(false);
+        Swal.fire("Reset", "The quiz has been reset.", "success");
+      }
+    });
   };
 
   if (!quizStarted) {
@@ -61,15 +75,15 @@ function App() {
       <div className="min-h-screen flex px-4 md:px-[100px] lg:px-[200px] xl:px-[350px] pt-[100px] lg:pt-[200px] items-center justify-center bg-gradient-to-r from-orange-400 to-yellow-600">
         <div className="bg-white opacity-90 p-6 sm:p-8 md:p-12 rounded-xl shadow-xl text-center max-w-xl md:max-w-2xl w-full">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 text-brown-800">
-             Quiz App
-          </h1> 
+            Quiz App
+          </h1>
           <button
             onClick={startQuiz}
             className="bg-orange-700 text-white p-3 sm:p-4 rounded-lg text-lg sm:text-2xl font-semibold shadow-md hover:bg-orange-800 transition duration-300"  >
             Get Started
           </button>
         </div>
-     </div>
+      </div>
     );
   }
 
@@ -92,7 +106,7 @@ function App() {
             onClick={resetQuiz}
             className="bg-orange-700 text-white p-3 sm:p-4 rounded-lg text-lg font-semibold shadow-md hover:bg-orange-800 transition duration-300"
           >
-            Restart Quiz
+            Reset Quiz
           </button>
         </div>
       </div>
@@ -142,4 +156,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
